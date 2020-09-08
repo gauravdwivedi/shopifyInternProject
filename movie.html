@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Shopify Movie Nomination</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' media='screen' href='movie.css'>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="container__shoppies">
+            <div class="container__shoppies__content">
+                <h2>The Shoppies</h2>
+                <div class="container__shoppies__search">
+                    <span>Movie title</span>
+                    <div class="container__shoppies__search__searchbar">
+                        <i class="material-icons">search</i>
+                        <input id="search-input" type="text" placeholder="search..." oninput="searchApi(this.value)" />
+
+                    </div>
+                </div>
+                <div class="container__searchresults">
+
+                    <div class="container__searchresults__left">
+                        <h3 id="search-key">Results for </h3>
+                        <div class="container__searchresults__left__list">
+                            <ul id="result-container">
+                                <!-- <li>
+                                    <div class="container__searchresults__left__list__poster">
+                                        <img alt="movie-img" />
+                                        <div>
+                                            <span>Rambo</span> <span>(1999)</span>
+                                            <button type="button">Nomination</button>
+                                        </div>
+                                    </div>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="container_searchResults-container">
+                        <div class="container__searchresults__right">
+                            <h4> Nominations</h4>
+                            <!-- <ul>
+                                <li>
+                                    Rambo(1999)
+                                    <button>Remove</button>
+                                </li>
+                            </ul> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src='movie.js'></script>
+</body>
+
+</html>
