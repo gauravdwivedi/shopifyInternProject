@@ -47,11 +47,8 @@ function init(movie) {
     }
 
     //check if movie is already being nominated
-
     const found = NominationList.find(element => element.Title === movie.Title);
 
-
-    // console.log("This is movie ", movie.Title);
 
     let ele = document.createElement("LI");
 
@@ -76,6 +73,7 @@ function init(movie) {
     let nomBtn = document.createElement("button");
     nomBtn.innerHTML = "Nominate";
     nomBtn.classList.add("nomination-btn");
+    //if movie is already being nominated disable button
     if (found !== undefined) {
         nomBtn.disabled = true;
     }
@@ -91,6 +89,7 @@ function init(movie) {
         NominationList.push(movie);
         console.log(NominationList);
         localStorage.setItem('NominationList', JSON.stringify(NominationList));
+        nomBtn.disabled = true;
         initNominationList(movie);
     })
 }
@@ -102,7 +101,7 @@ function clearList() {
 }
 
 function initNominationList(movie) {
-    // console.log(movie);
+
     let ele = document.createElement("LI");
 
 
@@ -120,13 +119,24 @@ function initNominationList(movie) {
     ele.appendChild(nomBtn);
     NominationConainer.appendChild(ele);
 
+
+    nomBtn.addEventListener('click', (e) => {
+
+        const index = NominationList.indexOf(movie.Title);
+        console.log('Movie Index', index);
+        if (index > -1) {
+            NominationList.splice(index, 1);
+            NominationConainer.removeChild(ele);
+        }
+
+
+    })
+
 }
 
 
 window.onload = () => {
     //parsing saved list into arrayList
-
-    // console.log("Inside Load");
 
     let saved = JSON.parse(localStorage.getItem('NominationList'));
     if (saved !== null) {
@@ -138,7 +148,8 @@ window.onload = () => {
     }
 }
 
+
+//clear storage to check if this is working
 clearLS = () => {
     localStorage.clear();
-    // console.log('Local Storage CLeared');
 }
