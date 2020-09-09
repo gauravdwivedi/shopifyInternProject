@@ -1,4 +1,3 @@
 # shopifyInternProject
-##Click below link for LIVE DEMO of this project
-#[LIVE DEMO](https://shopifychallenge.netlify.app)
+#Click on this for [LIVE DEMO](https://shopifychallenge.netlify.app)
 
