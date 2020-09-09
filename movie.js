@@ -2,32 +2,41 @@ let NominationList = [];
 
 const rescontainer = document.getElementById('result-container');
 
+const searchkey = document.getElementById('search-key');
 
-
+const NominationConainer = document.getElementById('nomination-container');
 
 async function searchApi(movie) {
 
     try {
 
-
-        const res = await fetch(`http://www.omdbapi.com/?apikey=cd273db5&t=${movie}`);
-
+        const res = await getData(movie);
         const data = await res.json();
         if (data.Response !== "False") {
+
+            searchkey.innerText = "Results for " + "'" + data.Title + "'";
             init(data);
+        } else {
+            searchkey.innerText = "Results for " + "'" + "Search is Empty" + "'";
+            clearList();
         }
     }
     catch (err) {
-        clearInput();
         console.log('Error occured', err);
+    }
+}
+async function getData(movie) {
+    try {
+        return await fetch(`http://www.omdbapi.com/?apikey=cd273db5&t=${movie}`);
+    } catch (err) {
+        console.log(err);
     }
 }
 
 function clearInput() {
     let searchInput = document.getElementById('search-input');
-    searchInput.innerText = "";
+    searchInput.value = "";
 }
-
 
 function init(movie) {
 
@@ -36,14 +45,6 @@ function init(movie) {
     }
 
     console.log(movie);
-
-    const searchkey = document.getElementById('search-key');
-    if (movie.Title) {
-        searchkey.innerText = "Results for " + "'" + movie.Title + "'";
-    } else {
-        searchkey.innerText = "Results for " + "'" + "Search is Empty" + "'";
-        clearInput();
-    }
 
     let ele = document.createElement("LI");
 
@@ -62,20 +63,72 @@ function init(movie) {
     txtEle.appendChild(movieTitle);
 
     let movieYear = document.createElement("span");
-    movieYear.innerText = movie.Year;
+    movieYear.innerHTML = "(" + movie.Year + ")";
     txtEle.appendChild(movieYear);
 
     let nomBtn = document.createElement("button");
     nomBtn.innerHTML = "Nominate";
+    nomBtn.classList.add("nomination-btn");
     txtEle.appendChild(nomBtn);
 
     movieEle.appendChild(txtEle);
 
     ele.appendChild(movieEle);
-    console.log(ele);
 
     rescontainer.prepend(ele);
 
+    nomBtn.addEventListener('click', function (e) {
+        NominationList.push(movie);
+        console.log(NominationList);
+        localStorage.setItem('NominationList', JSON.stringify(NominationList));
+        initNominationList(movie);
+    })
+}
 
 
+function clearList() {
+    console.log("ClearList Called");
+    rescontainer.innerHTML = "";
+}
+
+function initNominationList(movie) {
+    console.log(movie);
+    let ele = document.createElement("LI");
+
+
+    let movieTitle = document.createElement("span");
+    movieTitle.innerText = movie.Title;
+    ele.appendChild(movieTitle);
+
+    let movieYear = document.createElement("span");
+    movieYear.innerHTML = "(" + movie.Year + ")";
+    ele.appendChild(movieYear);
+
+    let nomBtn = document.createElement("button");
+    nomBtn.innerHTML = "Nominate";
+    nomBtn.classList.add("nomination-btn");
+    ele.appendChild(nomBtn);
+    NominationConainer.appendChild(ele);
+
+}
+
+
+window.onload = () => {
+    //parsing saved list into arrayList
+
+    console.log("Inside Load");
+
+    let saved = JSON.parse(localStorage.getItem('NominationList'));
+    if (saved !== null) {
+        NominationList = saved;
+        console.log(NominationList);
+        NominationList.map((movie) => {
+            initNominationList(movie);
+        })
+    }
+}
+
+clearLS = () => {
+    localStorage.clear();
+    console.log('Local Storage CLeared');
 }

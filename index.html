@@ -12,12 +12,12 @@
 </head>
 
 <body>
-
+    <button onclick="clearLS()">CL</button>
     <div class="container">
         <div class="container__shoppies">
             <div class="container__shoppies__content">
                 <h2>The Shoppies</h2>
-                <div class="container__shoppies__search">
+                <div class="container__shoppies__search boxshadow">
                     <span>Movie title</span>
                     <div class="container__shoppies__search__searchbar">
                         <i class="material-icons">search</i>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="container__searchresults">
 
-                    <div class="container__searchresults__left">
+                    <div class="container__searchresults__left boxshadow">
                         <h3 id="search-key">Results for </h3>
                         <div class="container__searchresults__left__list">
                             <ul id="result-container">
@@ -44,14 +44,14 @@
                         </div>
                     </div>
                     <div class="container_searchResults-container">
-                        <div class="container__searchresults__right">
+                        <div class="container__searchresults__right boxshadow">
                             <h4> Nominations</h4>
-                            <!-- <ul>
-                                <li>
-                                    Rambo(1999)
-                                    <button>Remove</button>
-                                </li>
-                            </ul> -->
+                            <ul id="nomination-container">
+                                <!-- <li>
+                                    <span>Rambo</span> <span>(1999)</span>
+                                    <button class="nomination-btn">Remove</button>
+                                </li> -->
+                            </ul>
                         </div>
                     </div>
                 </div>

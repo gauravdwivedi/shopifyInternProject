@@ -28,13 +28,14 @@
 .container__shoppies__search{
    
     margin: 10px;
-    padding: 0.5%;
+    padding: 10px;
     background: white;
     line-height: 1.5em;
-    box-shadow:  #ffffff;
-    
 }
 
+.boxshadow{
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.09);
+}
 .container__shoppies__search >span{
     font-family: sans-serif;
     margin-bottom: 20px;
@@ -69,6 +70,7 @@
 
 .container__shoppies__search__searchbar{
     border: 1px solid gray ;
+    margin: 5px;
    
 }
 
@@ -106,4 +108,10 @@
     height: 50px;
     width: 50px;
     margin: 5px;
+}
+
+.nomination-btn{
+    padding: 5px;
+    margin: 5px;
+    outline: none;
 }
