@@ -27,7 +27,7 @@ async function searchApi(movie) {
 }
 async function getData(movie) {
     try {
-        return await fetch(`http://www.omdbapi.com/?apikey=cd273db5&t=${movie}`);
+        return await fetch(`https://www.omdbapi.com/?apikey=cd273db5&t=${movie}`);
     } catch (err) {
         console.log(err);
     }
