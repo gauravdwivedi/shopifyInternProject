@@ -11,7 +11,7 @@ async function searchApi(movie) {
         const data = await res.json();
         if (data.Response !== "False") {
 
-            searchkey.innerText = "Results for " + "'" + data.Title + "'";
+            searchkey.innerText = "Results for " + "'" + movie + "'";
             init(data);
         } else {
             searchkey.innerText = "Results for " + "'" + "Search is Empty" + "'";
