@@ -1,9 +1,6 @@
 let NominationList = [];
-
 const rescontainer = document.getElementById('result-container');
-
 const searchkey = document.getElementById('search-key');
-
 const NominationConainer = document.getElementById('nomination-container');
 
 async function searchApi(movie) {
@@ -25,6 +22,8 @@ async function searchApi(movie) {
         console.log('Error occured', err);
     }
 }
+
+//fetching movies from api based on use input
 async function getData(movie) {
     try {
         return await fetch(`https://www.omdbapi.com/?apikey=cd273db5&t=${movie}`);
@@ -33,18 +32,26 @@ async function getData(movie) {
     }
 }
 
+//to clear the  browser localstorage
 function clearInput() {
     let searchInput = document.getElementById('search-input');
     searchInput.value = "";
 }
 
+//initialize the DOM elements to display search results
 function init(movie) {
 
+    //if no valid data present
     if (typeof (movie) === undefined) {
         return;
     }
 
-    console.log(movie);
+    //check if movie is already being nominated
+
+    const found = NominationList.find(element => element.Title === movie.Title);
+
+
+    // console.log("This is movie ", movie.Title);
 
     let ele = document.createElement("LI");
 
@@ -69,6 +76,9 @@ function init(movie) {
     let nomBtn = document.createElement("button");
     nomBtn.innerHTML = "Nominate";
     nomBtn.classList.add("nomination-btn");
+    if (found !== undefined) {
+        nomBtn.disabled = true;
+    }
     txtEle.appendChild(nomBtn);
 
     movieEle.appendChild(txtEle);
@@ -92,7 +102,7 @@ function clearList() {
 }
 
 function initNominationList(movie) {
-    console.log(movie);
+    // console.log(movie);
     let ele = document.createElement("LI");
 
 
@@ -105,7 +115,7 @@ function initNominationList(movie) {
     ele.appendChild(movieYear);
 
     let nomBtn = document.createElement("button");
-    nomBtn.innerHTML = "Nominate";
+    nomBtn.innerHTML = "Remove";
     nomBtn.classList.add("nomination-btn");
     ele.appendChild(nomBtn);
     NominationConainer.appendChild(ele);
@@ -116,12 +126,12 @@ function initNominationList(movie) {
 window.onload = () => {
     //parsing saved list into arrayList
 
-    console.log("Inside Load");
+    // console.log("Inside Load");
 
     let saved = JSON.parse(localStorage.getItem('NominationList'));
     if (saved !== null) {
         NominationList = saved;
-        console.log(NominationList);
+        // console.log(NominationList);
         NominationList.map((movie) => {
             initNominationList(movie);
         })
@@ -130,5 +140,5 @@ window.onload = () => {
 
 clearLS = () => {
     localStorage.clear();
-    console.log('Local Storage CLeared');
+    // console.log('Local Storage CLeared');
 }
