@@ -121,12 +121,15 @@ function initNominationList(movie) {
 
 
     nomBtn.addEventListener('click', (e) => {
-
-        const index = NominationList.indexOf(movie.Title);
+        console.log(movie);
+        const index = NominationList.indexOf(movie);
         console.log('Movie Index', index);
         if (index > -1) {
-            NominationList.splice(index, 1);
+            const res = NominationList.splice(index, 1);
             NominationConainer.removeChild(ele);
+            localStorage.setItem('NominationList', JSON.stringify(NominationList));
+            console.log(res);
+            console.log(NominationList);
         }
 
 
